@@ -9,4 +9,12 @@ const statusFilter = document.getElementById("statusFilter");
 const catergoryFilter = document.getElementById("categoryFilter");
 const noTasksMessage = document.getElementById("noTasksMessage");
 
+//Task Array to store all tasks//
+let tasks = [];
 
+//Set minimum date for deadline to today//
+const today = new Date();
+const formattedDate = today.tolSOString().split("T")[0];
+taskDeadlineInput.setAttribute("min", formattedDate);
+
+//
