@@ -17,4 +17,13 @@ const today = new Date();
 const formattedDate = today.tolSOString().split("T")[0];
 taskDeadlineInput.setAttribute("min", formattedDate);
 
-//
+//Initialize the app//
+function init(){
+  //Load tasks form LocalStorage//
+  loadTasks();
+
+  //Add event listeners//
+  addTaskBtn.addEventListener("click", addTask);
+  statusFilter.addEventListener("change", filterTasks);
+  catergoryFilter.addEventListener("change", filterTasks);
+}
