@@ -96,6 +96,30 @@ function addTask(){
 
     //Filter tasks based on selected filters//
     let filteredTasks = tasks;
-    
+
+    if(statusFilterValue!=="All"){
+      filteredTasks = filteredTasks.filter(task => task.status === statusFilterValue);
+    }
+
+    if(categoryFilterValue!==="All"){
+      filteredTasks = filteredTasks.filter(task=>task.category===categoryFilterValue);
+    }
+
+    //Display message if no tasks//
+    if(filteredTasks.legnth===0){
+      noTasksMessage.classList.remove("hidden");
+    } else {
+      noTasksMessage.classList.add("hidden");
+    }
+
+    //Display filtered tasks//
+    filteredTasks.forEach(task=>{
+      //Create table row//
+      const row = document.createElement("tr");
+
+      //Format the date//
+      const deadlineDate = newDate(task.deadline);
+    })
+    }
   }
 }
