@@ -179,8 +179,41 @@ function addTask(){
 
       //Save to localStorage//
       saveTasks();
-      
+      //Refresh display in case filters are active//
+      displayTasks();
       }
+    }
+    //Delete a task//
+    function deleteTasks(e){
+      const taskId=parseInt(e.target.getAttribute("data-id"));
+
+      //confirm deletion//
+      if(confirm("Are you sure you want to delete this task?")){
+        //filterout the task to delete//
+        tasks=tasks.filter(task=>task.id!==taskId);
+
+        //Save to local storage//
+        saveTasks();
+        //Refresh display//
+        displayTasks();
+      }
+    }
+    //Check for overdue tasks//
+    function checkOverdueTasks(){
+      const currentDate=new Date();
+      currentDate.setHours(0,0,0,0);//Set to beginning of day for accurate comparsion//
+
+          tasks.forEach(task => {
+        const deadlineDate = new Date(task.deadline);
+        deadlineDate.setHours(0, 0, 0, 0); // Set to beginning of day
+        
+        // Mark as overdue if deadline has passed and task is not completed
+        if (deadlineDate < currentDate && task.status !== "Completed") {
+            task.status = "Overdue";
+        }
+    });
+
+
     }
   }
 }
