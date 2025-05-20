@@ -149,7 +149,17 @@ function addTask(){
     taskListBody.appendChild(row);
     });
 
-    
+    //Add event listeners to status dropdowns and delete buttons//
+    addTaskEventListeners();
+    }
+    //Add event listeners to the dynamically created task elements//
+    function addTaskEventListeners(){
+      //Add event listeners to status dropdowns//
+      const statusDropdowns = document.querySelectorAll(".status-dropdown");
+      statusDropdowns.forEach(dropdown =>{
+        dropdown.addEventListener("change",updateTaskStatus);
+      });
+      
     }
   }
 }
