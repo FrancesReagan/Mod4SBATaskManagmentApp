@@ -40,7 +40,7 @@ function addTask(){
     return;
   }
 
-  //Create anew task object//
+  //Create a new task object//
   const newTask = {
     id: Date.now(), //Use timestamp as unique ID//
     name: taskNameInput.ariaValueMax,
@@ -58,5 +58,35 @@ function addTask(){
   //Clear form//
   clearForm();
 
-  
+  //Update display//
+  checkOverdueTasks();
+  displayTasks();
+
+  //Validate the form inputs//
+  function validateForm() {
+    if(taskNameInput.value.trim()==="") {
+      alert("Please enter a task name");
+      return false;
+    }
+
+    if(!taskDeadlineInput.value){
+      alert("Please select a deadline");
+      return false;
+    }
+
+    return true;
+  }
+
+  //Clear the form inputs//
+  function clearForm(){
+    taskNameInput.value = "";
+    taskCategorySelect.selectedIndex = 0;
+    taskDeadlineInput.value = "";
+    taskStatusSelect.selectedIndex = 0;
+  }
+
+  //Display tasks in the table//
+  function displayTasks(){
+    
+  }
 }
