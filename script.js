@@ -165,6 +165,22 @@ function addTask(){
         button.addEventListener("click",deleteTask);
       });
     }
-    //
+    //Update task status
+    function updateTaskStatus(e){
+      const taskId = parseInt(e.target.getAttribute("data-id"));
+      const newStatus = e.target.value;
+
+      //Find the task and update its status//
+      const taskIndex = tasks.findIndex(task=>task.id===taskId);
+      if(taskIndex!==-1){
+        tasks[taskIndex].status = newStatus;
+      //Update status class//
+      e.target.className = `status-dropdown${newStatus.toLowerCase().replace("","-")}`;
+
+      //Save to localStorage//
+      saveTasks();
+      
+      }
+    }
   }
 }
