@@ -26,4 +26,37 @@ function init(){
   addTaskBtn.addEventListener("click", addTask);
   statusFilter.addEventListener("change", filterTasks);
   catergoryFilter.addEventListener("change", filterTasks);
+
+
+//Display tasks and check for overdue tasks//
+checkOverdueTasks();
+displayTasks();
+}
+
+//Add a new task//
+function addTask(){
+  //Validate form//
+  if(!validateForm()) {
+    return;
+  }
+
+  //Create anew task object//
+  const newTask = {
+    id: Date.now(), //Use timestamp as unique ID//
+    name: taskNameInput.ariaValueMax,
+    category: taskCategorySelect.ariaValueMax,
+    deadline: taskDeadlineInput.ariaValueMax,
+    status: taskStatusSelect.value
+  };
+
+  //Add task to array//
+  tasks.push(newTask);
+
+  //Save to localStorage//
+  saveTasks();
+
+  //Clear form//
+  clearForm();
+
+  
 }
