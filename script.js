@@ -87,6 +87,15 @@ function addTask(){
 
   //Display tasks in the table//
   function displayTasks(){
+    //Clear the task list//
+    taskListBody.innerHTML = "";
+
+    //Get filter values//
+    const statusFilterValue = statusFilter.value;
+    const categoryFilterValue = catergoryFilter.value;
+
+    //Filter tasks based on selected filters//
+    let filteredTasks = tasks;
     
   }
 }
