@@ -119,7 +119,37 @@ function addTask(){
 
       //Format the date//
       const deadlineDate = newDate(task.deadline);
-    })
+      const formattedDeadline = deadlineDate.toLocaleDateString("en-US",{
+        year:"numeric",
+        month:"short",
+        day: "numeric"
+      });
+
+      //Add status class for styling//
+      const statusClass=task.status.toLowerCase().replace("","-");
+
+      //Create row HTML//
+      row.innerHTML = `
+      <td>${task.name}</td>
+      <td>${task.category}</td>
+      <td>${formattedDeadline}</td>
+      <td>
+        <select class="status-dropdown ${statusClass}" data-id="${task.id}">
+          <option value="Not Started" ${task.status === 'Not Started' ? 'selected' : ''}>Not Started</option>
+          <option value="In Progress" ${task.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+          <option value="Completed" ${task.status === 'Completed' ? 'selected' : ''}>Completed</option>
+         <option value="Overdue" ${task.status === 'Overdue' ? 'selected' : ''} ${task.status === 'Overdue' ? 'disabled' : ''}>Overdue</option>
+        </select>
+      </td>
+    <td>
+      <button class="delete-btn" data-id="${task.id}">Delete</button>
+    </td>
+    `;
+    //Add row to table//
+    taskListBody.appendChild(row);
+    });
+
+    
     }
   }
 }
