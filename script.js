@@ -159,7 +159,12 @@ function addTask(){
       statusDropdowns.forEach(dropdown =>{
         dropdown.addEventListener("change",updateTaskStatus);
       });
-      
+      //Add event listeners to delete buttons//
+      const deleteButtons = document.querySelectorAll(".delete-btn");
+      deleteButtons.forEach(button=>{
+        button.addEventListener("click",deleteTask);
+      });
     }
+    //
   }
 }
