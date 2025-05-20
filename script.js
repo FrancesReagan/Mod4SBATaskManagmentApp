@@ -212,8 +212,24 @@ function addTask(){
             task.status = "Overdue";
         }
     });
-
-
+    //Save updated tasks to localStorage//
+    saveTasks();
     }
+    //Filter tasks
+    function filterTasks(){
+      displayTasks();
+    }
+    //Save tasks to local storage//
+    function saveTasks(){
+      localStorage.setItem("tasks",JSON.stringify(tasks));
+    }
+    //Load tasks from local storage//
+    function loadTasks(){
+      const storedTasks = localStorage.getItem("tasks");
+      if(storedTasks){
+        tasks = JSON.parse(storedTasks);
+      }
+    }
+    //Initialize the app when the DOM is loaded//
+    document.addEventListener("DOMContentLoaded",init);
   }
-}
