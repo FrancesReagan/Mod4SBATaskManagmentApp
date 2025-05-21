@@ -27,5 +27,14 @@ h1{
 h2 {
   margin-bottom:15px;
   color:#3498db;
-  
+
 }
+
+.task-form,.task-filter,.task-list-container{
+  background-color: white;
+  border-radius:8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
