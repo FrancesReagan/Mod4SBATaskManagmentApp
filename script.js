@@ -6,7 +6,7 @@ const taskStatusSelect = document.getElementById("taskStatus");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskListBody = document.getElementById("taskListBody");
 const statusFilter = document.getElementById("statusFilter");
-const catergoryFilter = document.getElementById("categoryFilter");
+const categoryFilter = document.getElementById("categoryFilter");
 const noTasksMessage = document.getElementById("noTasksMessage");
 
 console.log("DOM elements initialized");
@@ -15,27 +15,26 @@ let tasks = [];
 
 //Set minimum date for deadline to today//
 const today = new Date();
-const formattedDate = today.tolSOString().split("T")[0];
+const formattedDate = today.toISOString().split("T")[0];
 taskDeadlineInput.setAttribute("min", formattedDate);
 console.log(`Setting minimum date for deadline input: ${formattedDate}`);
 
 //Initialize the app//
 function init(){
   console.log("Initializing application...");
-  //Load tasks form LocalStorage//
+  //Load tasks from LocalStorage//
   loadTasks();
 
   //Add event listeners//
   addTaskBtn.addEventListener("click", addTask);
   statusFilter.addEventListener("change", filterTasks);
-  catergoryFilter.addEventListener("change", filterTasks);
+  categoryFilter.addEventListener("change", filterTasks);
   console.log("Event listeners added");
 
-
-//Display tasks and check for overdue tasks//
-checkOverdueTasks();
-displayTasks();
-console.log("Application initialized successfully");
+  //Display tasks and check for overdue tasks//
+  checkOverdueTasks();
+  displayTasks();
+  console.log("Application initialized successfully");
 }
 
 //Add a new task//
@@ -51,9 +50,9 @@ function addTask(){
   //Create a new task object//
   const newTask = {
     id: Date.now(), //Use timestamp as unique ID//
-    name: taskNameInput.ariaValueMax,
-    category: taskCategorySelect.ariaValueMax,
-    deadline: taskDeadlineInput.ariaValueMax,
+    name: taskNameInput.value,
+    category: taskCategorySelect.value,
+    deadline: taskDeadlineInput.value,
     status: taskStatusSelect.value
   };
 
@@ -112,7 +111,7 @@ function addTask(){
 
     //Get filter values//
     const statusFilterValue = statusFilter.value;
-    const categoryFilterValue = catergoryFilter.value;
+    const categoryFilterValue = categoryFilter.value;
     console.log(`Current filters - Status: ${statusFilterValue}, Category: ${categoryFilterValue}`);
 
     //Filter tasks based on selected filters//
@@ -123,13 +122,13 @@ function addTask(){
       console.log(`Filtered by status: ${statusFilterValue}. Tasks remaining: ${filteredTasks.length}`);
     }
 
-    if(categoryFilterValue!==="All"){
+    if (categoryFilterValue!=="All"){
       filteredTasks = filteredTasks.filter(task=>task.category===categoryFilterValue);
-       console.log(`Filtered by catergory: ${catergoryFilterValue}. Tasks remaining: ${filteredTasks.length}`);
+       console.log(`Filtered by category: ${categoryFilterValue}. Tasks remaining: ${filteredTasks.length}`);
     }
 
     //Display message if no tasks//
-    if(filteredTasks.legnth===0){
+    if(filteredTasks.length===0){
       console.log("No tasks match the current filters");
       noTasksMessage.classList.remove("hidden");
     } else {
@@ -144,7 +143,7 @@ function addTask(){
       const row = document.createElement("tr");
 
       //Format the date//
-      const deadlineDate = newDate(task.deadline);
+      const deadlineDate = new Date(task.deadline);
       const formattedDeadline = deadlineDate.toLocaleDateString("en-US",{
         year:"numeric",
         month:"short",
@@ -152,7 +151,7 @@ function addTask(){
       });
 
       //Add status class for styling//
-      const statusClass=task.status.toLowerCase().replace("","-");
+      const statusClass = task.status.toLowerCase().replace(" ", "-");
 
       //Create row HTML//
       row.innerHTML = `
@@ -189,8 +188,8 @@ function addTask(){
       });
       //Add event listeners to delete buttons//
       const deleteButtons = document.querySelectorAll(".delete-btn");
-      deleteButtons.forEach(button=>{
-        button.addEventListener("click",deleteTask);
+      deleteButtons.forEach(button=> {
+        button.addEventListener("click", deleteTasks);
       });
     }
     //Update task status
@@ -203,7 +202,7 @@ function addTask(){
       if(taskIndex!==-1){
         tasks[taskIndex].status = newStatus;
       //Update status class//
-      e.target.className = `status-dropdown${newStatus.toLowerCase().replace("","-")}`;
+    e.target.className = `status-dropdown ${newStatus.toLowerCase().replace(" ", "-")}`;
 
       //Save to localStorage//
       saveTasks();
