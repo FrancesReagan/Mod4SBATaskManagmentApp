@@ -66,3 +66,35 @@ button {
   font-size:16px;
   transition:background-color 0.3s;
 }
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.filter-controls {
+  display:flex;
+  gap:20px;
+}
+
+.filter-group {
+  flex:1
+}
+
+/* task list styles */
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+/* table */
+th,td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom:1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
