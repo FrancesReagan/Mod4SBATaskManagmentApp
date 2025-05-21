@@ -122,4 +122,22 @@ tr:hover{
   background-color: #c0392b;
 }
 
+/* status colors */
+.not-started {
+  color:#7f8c8d;
+}
+
+.in-progress {
+  color:#3498db;
+}
+
+.completed {
+  color:#2ecc71;
+}
+
+.overdue {
+  color:#e74c3c;
+  font-weight:bold;
+}
+
 
